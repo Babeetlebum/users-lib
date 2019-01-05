@@ -1,0 +1,13 @@
+overwrite: true
+schema: "../users-api/src/schema.graphql"
+documents: projects/auth/src/lib/requests/*.graphql
+generates:
+    projects/auth/src/lib/services/graphql/graphql.service.ts:
+        config:
+            noNamespaces: true
+        # noGraphqlTag: true
+        plugins:
+            - typescript-common
+            - typescript-apollo-angular
+            - typescript-client
+            #- typescript-server
