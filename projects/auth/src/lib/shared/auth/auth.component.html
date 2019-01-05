@@ -1,0 +1,80 @@
+<mat-card class="auth__card" fxLayout="column" fxFill>
+    <form [formGroup]="isSignup ? signupForm : loginForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-evenly" fxFill>
+
+    <mat-card-header class="auth__title" fxLayout="row" fxLayoutAlign="center center" fxFlex="25">
+        <mat-card-title>
+            <mat-icon class="auth__title__icon" aria-hidden="true" color="primary">whatshot</mat-icon>
+            {{ isSignup ? 'Register' : 'Login' }}
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="auth__content" fxLayout="column" fxLayoutAlign="space-around" fxFlex="grow">
+
+            <ng-template [ngIf]="isSignup">
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-form-field fxFlex="70">
+                    <input matInput placeholder="Username" type="text" formControlName="username">
+                </mat-form-field>
+            </div>
+            </ng-template>
+
+
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-form-field fxFlex="70">
+                    <input matInput placeholder="Email" type="text" formControlName="email">
+                </mat-form-field>
+            </div>
+
+            <ng-template [ngIf]="isSignup">
+            <div fxLayout="row" fxLayoutAlign="center">
+                <div fxLayout="row" fxFlex="70" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="45">
+                        <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                        <mat-icon class="auth__content__icon" matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="45">
+                        <input matInput placeholder="Confirm password" [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
+                        <mat-icon matSuffix class="auth__content__icon" (click)="hideConfirmPassword = !hideConfirmPassword">{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+            </ng-template>
+
+            <ng-template [ngIf]="!isSignup">
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-form-field fxFlex="70">
+                    <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <mat-icon class="auth__content__icon" matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+            </div>
+            </ng-template>
+
+    </mat-card-content>
+
+    <mat-spinner class="auth__spinner" [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+
+    <mat-card-actions  class="auth__actions" fxLayout="column" fxLayoutAlign="center center" fxFlex="25">
+        <div fxFlex="66">
+            <ng-template [ngIf]="isSignup">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">
+                Sign up
+            </button>
+            </ng-template>
+            <ng-template [ngIf]="!isSignup">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+                Login
+            </button>
+            </ng-template>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxFlex="33">
+            <button mat-raised-button color="basic" type="button" (click)="onCancel()">
+                {{ isSignup ? "Already have an account ? Log in !" : "Don't have an account yet ? Create one !" }}
+            </button>
+        </div>
+
+    </mat-card-actions>
+
+    </form>
+</mat-card>

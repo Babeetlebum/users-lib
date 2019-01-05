@@ -1,0 +1,15 @@
+{
+    "extends": ["tslint:latest", "tslint-config-prettier"],
+    "linterOptions": {
+        "exclude": ["src/app/generated/graphql.ts"]
+    },
+    "rules": {
+        "no-submodule-imports": [
+            true,
+            "rxjs",
+            "@angular/platform-browser",
+            "@angular/core/testing",
+            "@angular/common/http"
+        ]
+    }
+}
