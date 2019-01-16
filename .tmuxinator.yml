@@ -1,0 +1,55 @@
+
+# ~/.tmuxinator/users-lib.yml
+
+name: users
+root: ~/Sources/users
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+# startup_pane: 1
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t users-lib
+parameters:
+    path_lib: &cd_to_lib 'cd users-lib'
+    path_ui:  &cd_to_ui  'cd users-ui'
+    path_api: &cd_to_api 'cd users-api'
+windows:
+  - users-lib:
+      layout: 5a21,211x54,0,0[211x36,0,0{130x36,0,0,1,80x36,131,0,7},211x17,0,37{105x17,0,37,5,105x17,106,37,6}]]
+      panes:
+        - lib_docker:
+            - cd users-lib/docker
+            - docker-compose up
+        - lib_ng-cli:
+            - cd users-lib
+            - sleep 15
+            - docker exec -ti userslib_webserver_1 bash
+            - ng help
+        - lib_git:
+            - cd users-lib
+        - lib_serve:
+            - cd users-lib
+            - sleep 15
+            - docker exec -ti userslib_webserver_1 bash
+            - yarn run dev

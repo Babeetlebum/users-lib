@@ -1,7 +1,13 @@
 {
-  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/auth",
-  "lib": {
-    "entryFile": "src/public_api.ts"
-  }
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/auth",
+    "lib": {
+        "entryFile": "src/public_api.ts",
+        "umdModuleIds": {
+            "graphql-tag": "gql",
+            "apollo-angular": "i1",
+            "apollo-angular-link-http": "apolloAngularLinkHttp",
+            "apollo-cache-inmemory": "apolloCacheInmemory"
+        }
+    }
 }

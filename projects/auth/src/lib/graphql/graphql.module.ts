@@ -1,13 +1,14 @@
-import { NgModule } from "@angular/core";
+import { Inject, NgModule } from "@angular/core";
 import { APOLLO_OPTIONS, ApolloModule } from "apollo-angular";
 import { HttpLink, HttpLinkModule } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-const uri = "http://localhost:8099";
-export function createApollo(httpLink: HttpLink) {
+import { AUTH_GRAPHQL_CONFIG, IGraphQLConfig } from "../models/index";
+
+export function createApollo(httpLink: HttpLink, authGraphQLConfig: IGraphQLConfig) {
     return {
         cache: new InMemoryCache(),
-        link: httpLink.create({ uri }),
+        link: httpLink.create({ uri: authGraphQLConfig.apiEndpoint }),
     };
 }
 
@@ -15,7 +16,7 @@ export function createApollo(httpLink: HttpLink) {
     exports: [ApolloModule, HttpLinkModule],
     providers: [
         {
-            deps: [HttpLink],
+            deps: [HttpLink, [new Inject(AUTH_GRAPHQL_CONFIG)]],
             provide: APOLLO_OPTIONS,
             useFactory: createApollo,
         },

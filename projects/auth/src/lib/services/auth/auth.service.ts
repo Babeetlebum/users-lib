@@ -1,8 +1,13 @@
 import { EventEmitter, Injectable } from "@angular/core";
 
-import { IUser, User } from "../../models/index";
+import { IUser, User } from "../../models/user";
 
-import { LoginRequestGQL, LoginRequestVariables, SignupRequestGQL, SignupRequestVariables } from "../../services/index";
+import {
+    LoginRequestGQL,
+    LoginRequestVariables,
+    SignupRequestGQL,
+    SignupRequestVariables,
+} from "../../services/graphql/graphql.service";
 
 @Injectable({
     providedIn: "root",

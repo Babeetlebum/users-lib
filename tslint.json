@@ -9,7 +9,8 @@
             "rxjs",
             "@angular/platform-browser",
             "@angular/core/testing",
-            "@angular/common/http"
+            "@angular/common/http",
+            "projects/auth/src/public_api"
         ]
     }
 }

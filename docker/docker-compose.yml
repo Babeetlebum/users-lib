@@ -1,0 +1,13 @@
+version: "3"
+services:
+    webserver:
+        image: trion/ng-cli:latest
+        volumes:
+            - ../:/app
+        ports:
+            - 8096:4200
+            - 49153:49153
+        entrypoint:
+            - "tail"
+            - "-f"
+            - "/dev/null"
